@@ -12,6 +12,9 @@ public class Util {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < parts.length; i++) {
             String s = parts[i];
+            if (s == null || s.isEmpty()) {
+                continue;
+            }
             if (s.contains("_")) {
                 s = LOWER_UNDERSCORE.to(LOWER_CAMEL, s);
             }
