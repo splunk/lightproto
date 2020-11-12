@@ -38,7 +38,7 @@ public class LightProtoMessage {
             field.tags(w);
             field.has(w);
             field.getter(w);
-            field.setter(w);
+            field.setter(w, message.getName());
             w.println();
         });
 
@@ -90,7 +90,7 @@ public class LightProtoMessage {
     }
 
     private void generateClear(PrintWriter w) {
-        w.format("        public void clear() {\n");
+        w.format("        public %s clear() {\n", message.getName());
         w.format("            _parsedBuffer = null;\n");
         w.format("            _cachedSize = -1;\n");
         for (int i = 0; i < bitFieldsCount(); i++) {
@@ -101,6 +101,7 @@ public class LightProtoMessage {
             f.clear(w);
         }
 
+        w.format("            return this;\n");
         w.format("        }\n");
     }
 

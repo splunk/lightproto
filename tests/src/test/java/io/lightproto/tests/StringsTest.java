@@ -26,8 +26,8 @@ public class StringsTest {
 
     @Test
     public void testStrings() throws Exception {
-        LightProtoStrings.S lps = new LightProtoStrings.S();
-        lps.setId("id");
+        LightProtoStrings.S lps = new LightProtoStrings.S()
+                .setId("id");
         lps.addName("a");
         lps.addName("b");
         lps.addName("c");

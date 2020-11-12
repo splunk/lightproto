@@ -27,8 +27,8 @@ public class BytesTest {
 
     @Test
     public void testBytes() throws Exception {
-        LightProtoBytes.B lpb = new LightProtoBytes.B();
-        lpb.setPayload(new byte[]{1, 2, 3});
+        LightProtoBytes.B lpb = new LightProtoBytes.B()
+                .setPayload(new byte[]{1, 2, 3});
 
         assertTrue(lpb.hasPayload());
         assertEquals(3, lpb.getPayloadSize());

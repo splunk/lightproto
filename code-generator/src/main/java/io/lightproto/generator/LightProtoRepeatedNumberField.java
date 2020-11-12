@@ -74,7 +74,7 @@ public class LightProtoRepeatedNumberField extends LightProtoField<Field<?>> {
     }
 
     @Override
-    public void setter(PrintWriter w) {
+    public void setter(PrintWriter w, String enclosingType) {
         w.format("public void %s(%s %s) {\n", camelCase("add", singularName), field.getJavaType(), singularName);
         w.format("    if (%s == null) {\n", pluralName);
         w.format("        %s = new %s[4];\n", pluralName, field.getJavaType());

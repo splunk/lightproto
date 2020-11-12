@@ -10,7 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddressBookTest {
 
@@ -29,27 +30,24 @@ public class AddressBookTest {
     @Test
     public void testAddressBook() throws Exception {
         LightProtoAddressbook.AddressBook ab = new LightProtoAddressbook.AddressBook();
-        LightProtoAddressbook.Person p1 = ab.addPerson();
-        p1.setName("name 1");
-        p1.setEmail("name1@example.com");
-        p1.setId(5);
-        LightProtoAddressbook.Person.PhoneNumber p1_pn1 = p1.addPhone();
-        p1_pn1.setNumber("xxx-zzz-1111");
-        p1_pn1.setType(LightProtoAddressbook.Person.PhoneType.HOME);
+        LightProtoAddressbook.Person p1 = ab.addPerson()
+                .setName("name 1")
+                .setEmail("name1@example.com")
+                .setId(5);
+        p1.addPhone()
+                .setNumber("xxx-zzz-1111")
+                .setType(LightProtoAddressbook.Person.PhoneType.HOME);
+        p1.addPhone()
+                .setNumber("xxx-zzz-2222")
+                .setType(LightProtoAddressbook.Person.PhoneType.MOBILE);
 
-        LightProtoAddressbook.Person.PhoneNumber p1_pn2 = p1.addPhone();
-        p1_pn2.setNumber("xxx-zzz-2222");
-        p1_pn2.setType(LightProtoAddressbook.Person.PhoneType.MOBILE);
-
-        LightProtoAddressbook.Person p2 = ab.addPerson();
-        p2.setName("name 2");
-        p2.setEmail("name2@example.com");
-        p2.setId(6);
-
-        LightProtoAddressbook.Person.PhoneNumber p2_pn1 = p2.addPhone();
-        p2_pn1.setNumber("xxx-zzz-2222");
-        p2_pn1.setType(LightProtoAddressbook.Person.PhoneType.HOME);
-
+        LightProtoAddressbook.Person p2 = ab.addPerson()
+                .setName("name 2")
+                .setEmail("name2@example.com")
+                .setId(6);
+        p2.addPhone()
+                .setNumber("xxx-zzz-2222")
+                .setType(LightProtoAddressbook.Person.PhoneType.HOME);
 
         assertEquals(2, ab.getPersonsCount());
         assertEquals("name 1", ab.getPersonAt(0).getName());

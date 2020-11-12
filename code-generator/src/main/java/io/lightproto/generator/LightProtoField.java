@@ -80,7 +80,7 @@ public abstract class LightProtoField<FieldType extends Field<?>> {
 
     abstract public void clear(PrintWriter w);
 
-    abstract public void setter(PrintWriter w);
+    abstract public void setter(PrintWriter w, String enclosingType);
 
     abstract public void getter(PrintWriter w);
 

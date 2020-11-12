@@ -166,11 +166,12 @@ public class LightProtoNumberField extends LightProtoField<Field<?>> {
     }
 
     @Override
-    public void setter(PrintWriter w) {
-        w.format("public void %s(%s %s) {\n", camelCase("set", field.getName()), field.getJavaType(), camelCase(field.getName()));
+    public void setter(PrintWriter w, String enclosingType) {
+        w.format("public %s %s(%s %s) {\n", enclosingType, camelCase("set", field.getName()), field.getJavaType(), camelCase(field.getName()));
         w.format("    this.%s = %s;\n", camelCase(field.getName()), camelCase(field.getName()));
         w.format("    _bitField%d |= %s;\n", bitFieldIndex(), fieldMask());
         w.format("    _cachedSize = -1;\n");
+        w.format("    return this;\n");
         w.format("}\n");
     }
 

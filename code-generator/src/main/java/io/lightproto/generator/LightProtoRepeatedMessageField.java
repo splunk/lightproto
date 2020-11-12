@@ -61,7 +61,7 @@ public class LightProtoRepeatedMessageField extends LightProtoField<MessageField
     }
 
     @Override
-    public void setter(PrintWriter w) {
+    public void setter(PrintWriter w, String enclosingType) {
         w.format("public %s %s() {\n", field.getJavaType(), camelCase("add", singularName));
         w.format("    if (%s == null) {\n", pluralName);
         w.format("        %s = new java.util.ArrayList<%s>();\n", pluralName, field.getJavaType());

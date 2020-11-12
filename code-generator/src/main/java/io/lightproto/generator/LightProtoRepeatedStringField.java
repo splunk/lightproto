@@ -64,7 +64,7 @@ public class LightProtoRepeatedStringField extends LightProtoField<Field.String>
     }
 
     @Override
-    public void setter(PrintWriter w) {
+    public void setter(PrintWriter w, String enclosingType) {
         w.format("public void %s(String %s) {\n", camelCase("add", singularName), singularName);
         w.format("    if (%s == null) {\n", pluralName);
         w.format("        %s = new java.util.ArrayList<StringHolder>();\n", pluralName);

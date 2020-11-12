@@ -51,8 +51,8 @@ public class RequiredTest {
 
     @Test
     public void testDeserializeWithMissingFields() throws Exception {
-        LightProtoRequired.NR lpnr = new LightProtoRequired.NR();
-        lpnr.setB(3);
+        LightProtoRequired.NR lpnr = new LightProtoRequired.NR()
+                .setB(3);
 
         lpnr.writeTo(bb1);
 
@@ -67,13 +67,13 @@ public class RequiredTest {
 
     @Test
     public void testIgnoreUnknownFields() throws Exception {
-        LightProtoRequired.RExt lprext = new LightProtoRequired.RExt();
-        lprext.setA(1);
-        lprext.setB(3);
-        lprext.setExtD(10);
-        lprext.setExtE(11);
-        lprext.setExtF(111L);
-        lprext.setExtG("hello");
+        LightProtoRequired.RExt lprext = new LightProtoRequired.RExt()
+                .setA(1)
+                .setB(3)
+                .setExtD(10)
+                .setExtE(11)
+                .setExtF(111L)
+                .setExtG("hello");
         int s1 = lprext.getSerializedSize();
 
         lprext.writeTo(bb1);

@@ -80,7 +80,7 @@ public class LightProtoRepeatedBytesField extends LightProtoField<Field.Bytes> {
     }
 
     @Override
-    public void setter(PrintWriter w) {
+    public void setter(PrintWriter w, String enclosingType) {
         w.format("public void %s(byte[] %s) {\n", camelCase("add", singularName), singularName);
         w.format("    %s(io.netty.buffer.Unpooled.wrappedBuffer(%s));\n", camelCase("add", singularName), singularName);
         w.format("}\n");

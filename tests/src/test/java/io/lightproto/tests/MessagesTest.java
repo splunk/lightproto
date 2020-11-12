@@ -29,20 +29,20 @@ public class MessagesTest {
     @Test
     public void testMessages() throws Exception {
         LightProtoMessages.M lpm = new LightProtoMessages.M();
-        LightProtoMessages.X lpmx = lpm.setX();
-        lpmx.setA("a");
-        lpmx.setB("b");
+        lpm.setX()
+                .setA("a")
+                .setB("b");
 
         assertEquals(Collections.emptyList(), lpm.getItemsList());
 
-        LightProtoMessages.M.KV kv1 = lpm.addItem();
-        kv1.setK("k1");
-        kv1.setV("v1");
+        lpm.addItem()
+                .setK("k1")
+                .setV("v1");
 
-        LightProtoMessages.M.KV kv2 = lpm.addItem();
-        kv2.setK("k2");
-        kv2.setV("v2");
-        kv2.setXx().setN(5);
+        lpm.addItem()
+                .setK("k2")
+                .setV("v2")
+                .setXx().setN(5);
 
         assertTrue(lpm.hasX());
         assertTrue(lpm.hasItems());
