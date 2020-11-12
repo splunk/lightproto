@@ -34,6 +34,14 @@ public class LightProtoRepeatedMessageField extends LightProtoField<MessageField
         w.format("    }\n");
         w.format("    return %s.get(idx);\n", pluralName);
         w.format("}\n");
+
+        w.format("public java.util.List<%s> %s() {\n", field.getJavaType(), camelCase("get", pluralName, "list"));
+        w.format("    if (_%sCount == 0) {\n", pluralName);
+        w.format("        return java.util.Collections.emptyList();\n");
+        w.format("    } else {\n");
+        w.format("        return %s.subList(0, _%sCount);\n", pluralName, pluralName);
+        w.format("    }\n");
+        w.format("}\n");
     }
 
     @Override

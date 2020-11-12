@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,6 +33,8 @@ public class MessagesTest {
         lpmx.setA("a");
         lpmx.setB("b");
 
+        assertEquals(Collections.emptyList(), lpm.getItemsList());
+
         LightProtoMessages.M.KV kv1 = lpm.addItem();
         kv1.setK("k1");
         kv1.setV("v1");
@@ -53,6 +57,15 @@ public class MessagesTest {
         assertEquals(5, lpm.getItemAt(1).getXx().getN());
         assertEquals("a", lpm.getX().getA());
         assertEquals("b", lpm.getX().getB());
+
+        List<LightProtoMessages.M.KV> itemsList = lpm.getItemsList();
+        assertEquals(2, itemsList.size());
+        assertEquals("k1", itemsList.get(0).getK());
+        assertEquals("v1", itemsList.get(0).getV());
+        assertEquals("k2", itemsList.get(1).getK());
+        assertEquals("v2", itemsList.get(1).getV());
+        assertEquals(5, itemsList.get(1).getXx().getN());
+
 
         Messages.X pbmx = Messages.X.newBuilder()
                 .setA("a")
