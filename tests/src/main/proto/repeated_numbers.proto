@@ -1,0 +1,49 @@
+syntax = "proto2";
+package io.lightproto.tests;
+
+message Repeated {
+    enum Enum {
+        X2_0 = 0;
+        X2_1 = 1;
+        X2_2 = 2;
+    }
+
+    repeated int32 x_int32 = 1;
+    repeated int64 x_int64 = 2;
+    repeated uint32 x_uint32 = 3;
+    repeated uint64 x_uint64 = 4;
+    repeated sint32 x_sint32 = 5;
+    repeated sint64 x_sint64 = 6;
+    repeated fixed32 x_fixed32 = 7;
+    repeated fixed64 x_fixed64 = 8;
+    repeated sfixed32 x_sfixed32 = 9;
+    repeated sfixed64 x_sfixed64 = 10;
+    repeated float x_float = 11;
+    repeated double x_double = 12;
+    repeated bool x_bool = 13;
+    repeated Enum enum1 = 14;
+}
+
+// Same as above but packed
+message RepeatedPacked {
+    enum Enum {
+        X2_0 = 0;
+        X2_1 = 1;
+        X2_2 = 2;
+    }
+
+    repeated Enum enum1 = 1 [packed = true];
+    repeated int64 x_int64 = 2 [packed = true];
+    repeated uint32 x_uint32 = 3 [packed = true];
+    repeated uint64 x_uint64 = 4 [packed = true];
+    repeated sint32 x_sint32 = 5 [packed = true];
+    repeated sint64 x_sint64 = 6 [packed = true];
+    repeated fixed32 x_fixed32 = 7 [packed = true];
+    repeated fixed64 x_fixed64 = 8 [packed = true];
+    repeated sfixed32 x_sfixed32 = 9 [packed = true];
+    repeated sfixed64 x_sfixed64 = 10 [packed = true];
+    repeated float x_float = 11 [packed = true];
+    repeated double x_double = 12 [packed = true];
+    repeated bool x_bool = 13 [packed = true];
+    repeated int32 x_int32 = 14 [packed = true];
+}

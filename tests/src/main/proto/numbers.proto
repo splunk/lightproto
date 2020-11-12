@@ -1,0 +1,34 @@
+syntax = "proto2";
+package io.lightproto.tests;
+
+
+enum Enum1 {
+    X1_0 = 0;
+    X1_1 = 1;
+    X1_2 = 2;
+}
+
+message Numbers {
+    enum Enum2 {
+        X2_0 = 0;
+        X2_1 = 1;
+        X2_2 = 2;
+    }
+
+    optional int32 x_int32 = 1;
+    optional int64 x_int64 = 2;
+    optional uint32 x_uint32 = 3;
+    optional uint64 x_uint64 = 4;
+    optional sint32 x_sint32 = 5;
+    optional sint64 x_sint64 = 6;
+    optional fixed32 x_fixed32 = 7;
+    optional fixed64 x_fixed64 = 8;
+    optional sfixed32 x_sfixed32 = 9;
+    optional sfixed64 x_sfixed64 = 10;
+    optional float x_float = 11;
+    optional double x_double = 12;
+    optional bool x_bool = 13;
+    optional Enum1 enum1 = 14;
+    optional Enum2 enum2 = 15;
+}
+

@@ -1,0 +1,7 @@
+syntax = "proto2";
+package io.lightproto.tests;
+
+message B {
+    optional bytes payload = 1;
+    repeated bytes extra_items = 2;
+}

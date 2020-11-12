@@ -1,0 +1,23 @@
+syntax = "proto2";
+package io.lightproto.tests;
+
+message X {
+    optional string a = 1;
+    optional string b = 2;
+}
+
+message M {
+    message KV {
+        message XX {
+            optional int32 n = 1;
+        }
+
+        required string k = 1;
+        required string v = 2;
+        optional XX xx = 3;
+    }
+
+    optional X x = 1;
+    repeated KV items = 2;
+}
+

@@ -1,0 +1,27 @@
+syntax = "proto2";
+package io.lightproto.tests;
+
+message R {
+    required int32 a = 1;
+    optional int32 b = 2;
+    optional int32 c = 3 [default = 5];
+}
+
+// Same as above but with no required field.
+message NR {
+    optional int32 a = 1;
+    optional int32 b = 2;
+    optional int32 c = 3 [default = 5];
+}
+
+// Same as above, but with additional field
+message RExt {
+    required int32 a = 1;
+    optional int32 b = 2;
+    optional int32 c = 3 [default = 5];
+
+    optional int32 ext_d = 4;
+    optional fixed32 ext_e = 5;
+    optional fixed64 ext_f = 6;
+    optional string ext_g = 7;
+}
