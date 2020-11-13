@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -64,5 +66,24 @@ public class StringsTest {
         assertEquals("a", parsed.getNameAt(0));
         assertEquals("b", parsed.getNameAt(1));
         assertEquals("c", parsed.getNameAt(2));
+    }
+
+    @Test
+    public void testAddAllStrings() throws Exception {
+        Set<String> strings = new TreeSet<>();
+        strings.add("a");
+        strings.add("b");
+        strings.add("c");
+
+        LightProtoStrings.S lps = new LightProtoStrings.S()
+                .setId("id")
+                .addAllNames(strings);
+
+        assertEquals("id", lps.getId());
+        assertTrue(lps.hasNames());
+        assertEquals(3, lps.getNamesCount());
+        assertEquals("a", lps.getNameAt(0));
+        assertEquals("b", lps.getNameAt(1));
+        assertEquals("c", lps.getNameAt(2));
     }
 }

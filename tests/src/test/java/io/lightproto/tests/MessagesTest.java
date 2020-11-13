@@ -6,9 +6,7 @@ import io.netty.buffer.Unpooled;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -133,5 +131,24 @@ public class MessagesTest {
         assertTrue(lp2.getX().hasB());
         assertEquals("a", lp2.getX().getA());
         assertEquals("b", lp2.getX().getB());
+    }
+
+    @Test
+    public void testAddAll() throws Exception {
+        List<LightProtoMessages.M.KV> kvs = new ArrayList<>();
+        kvs.add(new LightProtoMessages.M.KV().setK("k1").setV("v1"));
+        kvs.add(new LightProtoMessages.M.KV().setK("k2").setV("v2"));
+        kvs.add(new LightProtoMessages.M.KV().setK("k3").setV("v3"));
+
+        LightProtoMessages.M lp = new LightProtoMessages.M()
+                .addAllItems(kvs);
+
+        assertEquals(3, lp.getItemsCount());
+        assertEquals("k1", lp.getItemAt(0).getK());
+        assertEquals("v1", lp.getItemAt(0).getV());
+        assertEquals("k2", lp.getItemAt(1).getK());
+        assertEquals("v2", lp.getItemAt(1).getV());
+        assertEquals("k3", lp.getItemAt(2).getK());
+        assertEquals("v3", lp.getItemAt(2).getV());
     }
 }

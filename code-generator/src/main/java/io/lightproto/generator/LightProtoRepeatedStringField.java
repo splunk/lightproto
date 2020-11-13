@@ -84,6 +84,13 @@ public class LightProtoRepeatedStringField extends LightProtoField<Field.String>
         w.format("    _sh.len = LightProtoCodec.computeStringUTF8Size(_sh.s);\n");
         w.format("}\n");
 
+        w.format("public %s %s(Iterable<String> %s) {\n", enclosingType, camelCase("addAll", pluralName), pluralName);
+        w.format("    for (String _s : %s) {\n", pluralName);
+        w.format("        %s(_s);\n", camelCase("add", singularName));
+        w.format("    }\n");
+        w.format("    return this;\n");
+        w.format("}\n");
+
 
         w.format("private StringHolder _%sStringHolder() {\n", camelCase("new", singularName));
         w.format("    if (%s == null) {\n", pluralName);

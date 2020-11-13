@@ -80,6 +80,16 @@ public class LightProtoRepeatedMessageField extends LightProtoField<MessageField
         w.format("    _cachedSize = -1;\n");
         w.format("    return %s.get(_%sCount++);\n", pluralName, pluralName);
         w.format("}\n");
+
+
+        w.format("public %s %s(Iterable<%s> %s) {\n", enclosingType, camelCase("addAll", pluralName), field.getJavaType(), pluralName);
+        w.format("    for (%s _o : %s) {\n", field.getJavaType(), pluralName);
+        w.format("        %s().copyFrom(_o);\n", camelCase("add", singularName));
+        w.format("    }\n");
+        w.format("    return this;\n");
+        w.format("}\n");
+
+
     }
 
     @Override
