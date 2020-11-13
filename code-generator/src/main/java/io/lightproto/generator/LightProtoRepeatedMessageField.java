@@ -61,6 +61,13 @@ public class LightProtoRepeatedMessageField extends LightProtoField<MessageField
     }
 
     @Override
+    public void copy(PrintWriter w) {
+        w.format("for (int i = 0; i < _other.%s(); i++) {\n", camelCase("get", pluralName, "count"));
+        w.format("    %s().copyFrom(_other.%s(i));\n", camelCase("add", singularName), camelCase("get", singularName, "at"));
+        w.format("}\n");
+    }
+
+    @Override
     public void setter(PrintWriter w, String enclosingType) {
         w.format("public %s %s() {\n", field.getJavaType(), camelCase("add", singularName));
         w.format("    if (%s == null) {\n", pluralName);

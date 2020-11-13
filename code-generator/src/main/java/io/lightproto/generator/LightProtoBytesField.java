@@ -27,6 +27,11 @@ public class LightProtoBytesField extends LightProtoField<Field.Bytes> {
     }
 
     @Override
+    public void copy(PrintWriter w) {
+        w.format("%s(_other.%s());\n", camelCase("set", ccName), camelCase("get", ccName));
+    }
+
+    @Override
     public void setter(PrintWriter w, String enclosingType) {
         w.format("public %s %s(byte[] %s) {\n", enclosingType, camelCase("set", ccName), ccName);
         w.format("    %s(io.netty.buffer.Unpooled.wrappedBuffer(%s));\n", camelCase("set", ccName), ccName);

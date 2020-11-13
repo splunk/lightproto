@@ -115,6 +115,13 @@ public class LightProtoRepeatedBytesField extends LightProtoField<Field.Bytes> {
     }
 
     @Override
+    public void copy(PrintWriter w) {
+        w.format("for (int i = 0; i < _other.%s(); i++) {\n", camelCase("get", pluralName, "count"));
+        w.format("    %s(_other.%s(i));\n", camelCase("add", singularName), camelCase("get", singularName, "at"));
+        w.format("}\n");
+    }
+
+    @Override
     public void serializedSize(PrintWriter w) {
         w.format("for (int i = 0; i < _%sCount; i++) {\n", pluralName);
         w.format("    BytesHolder _bh = %s.get(i);\n", pluralName);

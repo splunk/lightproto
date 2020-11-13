@@ -89,6 +89,13 @@ public class LightProtoRepeatedNumberField extends LightProtoField<Field<?>> {
     }
 
     @Override
+    public void copy(PrintWriter w) {
+        w.format("for (int i = 0; i < _other.%s(); i++) {\n", camelCase("get", pluralName, "count"));
+        w.format("    %s(_other.%s(i));\n", camelCase("add", singularName), camelCase("get", singularName, "at"));
+        w.format("}\n");
+    }
+
+    @Override
     public void serializedSize(PrintWriter w) {
         String tmpName = camelCase("_msgSize", field.getName());
 

@@ -185,6 +185,11 @@ public class LightProtoNumberField extends LightProtoField<Field<?>> {
     }
 
     @Override
+    public void copy(PrintWriter w) {
+        w.format("%s(_other.%s);\n", camelCase("set", ccName), ccName);
+    }
+
+    @Override
     public void clear(PrintWriter w) {
         if (field.isDefaultValueSet()) {
             w.format("%s = %s;\n", ccName, field.getDefaultValueAsString());

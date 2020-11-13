@@ -29,6 +29,11 @@ public class LightProtoMessageField extends LightProtoField<MessageField> {
         w.format("}\n");
     }
 
+    @Override
+    public void copy(PrintWriter w) {
+        w.format("%s().copyFrom(_other.%s);\n", camelCase("set", ccName), ccName);
+    }
+
     public void getter(PrintWriter w) {
         w.format("public %s %s() {\n", field.getJavaType(), camelCase("get", field.getName()));
         w.format("    if (!%s()) {\n", camelCase("has", ccName));

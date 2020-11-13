@@ -117,4 +117,21 @@ public class MessagesTest {
         assertEquals("a", parsed.getX().getA());
         assertEquals("b", parsed.getX().getB());
     }
+
+    @Test
+    public void testCopyFrom() throws Exception {
+        LightProtoMessages.M lp1 = new LightProtoMessages.M();
+        lp1.setX()
+                .setA("a")
+                .setB("b");
+
+        LightProtoMessages.M lp2 = new LightProtoMessages.M();
+        lp2.copyFrom(lp1);
+
+        assertTrue(lp2.hasX());
+        assertTrue(lp2.getX().hasA());
+        assertTrue(lp2.getX().hasB());
+        assertEquals("a", lp2.getX().getA());
+        assertEquals("b", lp2.getX().getB());
+    }
 }

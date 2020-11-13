@@ -40,6 +40,10 @@ public class RequiredTest {
 
         assertEquals(5, lpr.getC()); // Default is set
 
+        lpr.setA(1);
+        assertTrue(lpr.hasA());
+        lpr.clearA();
+        assertFalse(lpr.hasA());
         lpr.setA(2);
 
         Required.R pbr = Required.R.newBuilder()

@@ -39,6 +39,7 @@ public class LightProtoMessage {
             field.has(w);
             field.getter(w);
             field.setter(w, message.getName());
+            field.fieldClear(w, message.getName());
             w.println();
         });
 
@@ -48,6 +49,7 @@ public class LightProtoMessage {
         generateParseFrom(w);
         generateCheckRequiredFields(w);
         generateClear(w);
+        generateCopyFrom(w);
 
         w.println("        private int _cachedSize;\n");
         w.println("        private io.netty.buffer.ByteBuf _parsedBuffer;\n");
@@ -99,6 +101,19 @@ public class LightProtoMessage {
 
         for (LightProtoField f : fields) {
             f.clear(w);
+        }
+
+        w.format("            return this;\n");
+        w.format("        }\n");
+    }
+
+    private void generateCopyFrom(PrintWriter w) {
+        w.format("public %s copyFrom(%s _other) {\n", message.getName(), message.getName());
+        w.format("            _cachedSize = -1;\n");
+        for (LightProtoField f : fields) {
+            w.format("    if (_other.%s()) {\n", camelCase("has", f.ccName));
+            f.copy(w);
+            w.format("    }\n");
         }
 
         w.format("            return this;\n");

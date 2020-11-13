@@ -36,6 +36,11 @@ public class LightProtoStringField extends LightProtoField<Field.String> {
     }
 
     @Override
+    public void copy(PrintWriter w) {
+        w.format("%s(_other.%s());\n", camelCase("set", ccName), camelCase("get", ccName));
+    }
+
+    @Override
     public void getter(PrintWriter w) {
         w.format("public %s %s() {\n", field.getJavaType(), camelCase("get", field.getName()));
         if (!field.isDefaultValueSet()) {

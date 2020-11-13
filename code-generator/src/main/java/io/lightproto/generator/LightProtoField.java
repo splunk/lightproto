@@ -80,6 +80,14 @@ public abstract class LightProtoField<FieldType extends Field<?>> {
 
     abstract public void clear(PrintWriter w);
 
+    public void fieldClear(PrintWriter w, String enclosingType) {
+        w.format("        public %s %s() {\n", enclosingType, camelCase("clear", field.getName()));
+        w.format("            _bitField%d &= ~%s;\n", bitFieldIndex(), fieldMask());
+        clear(w);
+        w.format("            return this;\n");
+        w.format("        }\n");
+    }
+
     abstract public void setter(PrintWriter w, String enclosingType);
 
     abstract public void getter(PrintWriter w);
@@ -89,6 +97,8 @@ public abstract class LightProtoField<FieldType extends Field<?>> {
     abstract public void serialize(PrintWriter w);
 
     abstract public void parse(PrintWriter w);
+
+    abstract public void copy(PrintWriter w);
 
     public boolean isPackable() {
         return field.isRepeated() && field.isPackable();
