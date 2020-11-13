@@ -26,7 +26,7 @@ public class MessagesTest {
 
     @Test
     public void testMessages() throws Exception {
-        LightProtoMessages.M lpm = new LightProtoMessages.M();
+        M lpm = new M();
         lpm.setX()
                 .setA("a")
                 .setB("b");
@@ -56,7 +56,7 @@ public class MessagesTest {
         assertEquals("a", lpm.getX().getA());
         assertEquals("b", lpm.getX().getB());
 
-        List<LightProtoMessages.M.KV> itemsList = lpm.getItemsList();
+        List<M.KV> itemsList = lpm.getItemsList();
         assertEquals(2, itemsList.size());
         assertEquals("k1", itemsList.get(0).getK());
         assertEquals("v1", itemsList.get(0).getV());
@@ -98,7 +98,7 @@ public class MessagesTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoMessages.M parsed = new LightProtoMessages.M();
+        M parsed = new M();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertTrue(parsed.hasX());
@@ -118,12 +118,12 @@ public class MessagesTest {
 
     @Test
     public void testCopyFrom() throws Exception {
-        LightProtoMessages.M lp1 = new LightProtoMessages.M();
+        M lp1 = new M();
         lp1.setX()
                 .setA("a")
                 .setB("b");
 
-        LightProtoMessages.M lp2 = new LightProtoMessages.M();
+        M lp2 = new M();
         lp2.copyFrom(lp1);
 
         assertTrue(lp2.hasX());
@@ -135,12 +135,12 @@ public class MessagesTest {
 
     @Test
     public void testAddAll() throws Exception {
-        List<LightProtoMessages.M.KV> kvs = new ArrayList<>();
-        kvs.add(new LightProtoMessages.M.KV().setK("k1").setV("v1"));
-        kvs.add(new LightProtoMessages.M.KV().setK("k2").setV("v2"));
-        kvs.add(new LightProtoMessages.M.KV().setK("k3").setV("v3"));
+        List<M.KV> kvs = new ArrayList<>();
+        kvs.add(new M.KV().setK("k1").setV("v1"));
+        kvs.add(new M.KV().setK("k2").setV("v2"));
+        kvs.add(new M.KV().setK("k3").setV("v3"));
 
-        LightProtoMessages.M lp = new LightProtoMessages.M()
+        M lp = new M()
                 .addAllItems(kvs);
 
         assertEquals(3, lp.getItemsCount());

@@ -26,7 +26,7 @@ public class RequiredTest {
 
     @Test
     public void testMissingFields() throws Exception {
-        LightProtoRequired.R lpr = new LightProtoRequired.R();
+        R lpr = new R();
         try {
             lpr.writeTo(bb1);
             fail("Should fail to serialize");
@@ -55,12 +55,12 @@ public class RequiredTest {
 
     @Test
     public void testDeserializeWithMissingFields() throws Exception {
-        LightProtoRequired.NR lpnr = new LightProtoRequired.NR()
+        NR lpnr = new NR()
                 .setB(3);
 
         lpnr.writeTo(bb1);
 
-        LightProtoRequired.R lpr = new LightProtoRequired.R();
+        R lpr = new R();
         try {
             lpr.parseFrom(bb1, bb1.readableBytes());
             fail("Should fail to de-serialize");
@@ -71,7 +71,7 @@ public class RequiredTest {
 
     @Test
     public void testIgnoreUnknownFields() throws Exception {
-        LightProtoRequired.RExt lprext = new LightProtoRequired.RExt()
+        RExt lprext = new RExt()
                 .setA(1)
                 .setB(3)
                 .setExtD(10)
@@ -82,7 +82,7 @@ public class RequiredTest {
 
         lprext.writeTo(bb1);
 
-        LightProtoRequired.R lpr = new LightProtoRequired.R();
+        R lpr = new R();
         lpr.parseFrom(bb1, bb1.readableBytes());
 
         assertEquals(1, lpr.getA());
@@ -90,7 +90,7 @@ public class RequiredTest {
         assertTrue(lpr.getSerializedSize() < s1);
     }
 
-    private void verify(LightProtoRequired.R lpr, Required.R pbr) throws Exception {
+    private void verify(R lpr, Required.R pbr) throws Exception {
         assertEquals(pbr.getSerializedSize(), lpr.getSerializedSize());
 
         lpr.writeTo(bb1);
@@ -100,7 +100,7 @@ public class RequiredTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoRequired.R parsed = new LightProtoRequired.R();
+        R parsed = new R();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertEquals(pbr.hasA(), parsed.hasA());

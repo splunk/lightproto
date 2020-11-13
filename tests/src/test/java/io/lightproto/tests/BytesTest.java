@@ -27,7 +27,7 @@ public class BytesTest {
 
     @Test
     public void testBytes() throws Exception {
-        LightProtoBytes.B lpb = new LightProtoBytes.B()
+        B lpb = new B()
                 .setPayload(new byte[]{1, 2, 3});
 
         assertTrue(lpb.hasPayload());
@@ -46,7 +46,7 @@ public class BytesTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoBytes.B parsed = new LightProtoBytes.B();
+        B parsed = new B();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertTrue(parsed.hasPayload());
@@ -56,7 +56,7 @@ public class BytesTest {
 
     @Test
     public void testBytesBuf() throws Exception {
-        LightProtoBytes.B lpb = new LightProtoBytes.B();
+        B lpb = new B();
         ByteBuf b = Unpooled.directBuffer(3);
         b.writeBytes(new byte[]{1, 2, 3});
         lpb.setPayload(b);
@@ -78,7 +78,7 @@ public class BytesTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoBytes.B parsed = new LightProtoBytes.B();
+        B parsed = new B();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertTrue(parsed.hasPayload());
@@ -95,7 +95,7 @@ public class BytesTest {
 
     @Test
     public void testRepeatedBytes() throws Exception {
-        LightProtoBytes.B lpb = new LightProtoBytes.B();
+        B lpb = new B();
         lpb.addExtraItem(new byte[]{1, 2, 3});
         lpb.addExtraItem(new byte[]{4, 5, 6, 7});
 
@@ -119,7 +119,7 @@ public class BytesTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoBytes.B parsed = new LightProtoBytes.B();
+        B parsed = new B();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertTrue(parsed.hasExtraItems());

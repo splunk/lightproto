@@ -13,6 +13,10 @@ public class LightProtoEnum {
         this.eg = eg;
     }
 
+    public String getName() {
+        return eg.getName();
+    }
+
     public void generate(PrintWriter w) {
         w.format("    public enum %s {\n", eg.getName());
         eg.getSortedValues().forEach(v -> {

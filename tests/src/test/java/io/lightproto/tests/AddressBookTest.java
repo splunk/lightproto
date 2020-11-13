@@ -1,7 +1,8 @@
 package io.lightproto.tests;
 
+import com.example.tutorial.AddressBook;
 import com.example.tutorial.AddressBookProtos;
-import com.example.tutorial.LightProtoAddressbook;
+import com.example.tutorial.Person;
 import com.google.protobuf.CodedOutputStream;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -29,37 +30,37 @@ public class AddressBookTest {
 
     @Test
     public void testAddressBook() throws Exception {
-        LightProtoAddressbook.AddressBook ab = new LightProtoAddressbook.AddressBook();
-        LightProtoAddressbook.Person p1 = ab.addPerson()
+        AddressBook ab = new AddressBook();
+        Person p1 = ab.addPerson()
                 .setName("name 1")
                 .setEmail("name1@example.com")
                 .setId(5);
         p1.addPhone()
                 .setNumber("xxx-zzz-1111")
-                .setType(LightProtoAddressbook.Person.PhoneType.HOME);
+                .setType(Person.PhoneType.HOME);
         p1.addPhone()
                 .setNumber("xxx-zzz-2222")
-                .setType(LightProtoAddressbook.Person.PhoneType.MOBILE);
+                .setType(Person.PhoneType.MOBILE);
 
-        LightProtoAddressbook.Person p2 = ab.addPerson()
+        Person p2 = ab.addPerson()
                 .setName("name 2")
                 .setEmail("name2@example.com")
                 .setId(6);
         p2.addPhone()
                 .setNumber("xxx-zzz-2222")
-                .setType(LightProtoAddressbook.Person.PhoneType.HOME);
+                .setType(Person.PhoneType.HOME);
 
         assertEquals(2, ab.getPersonsCount());
         assertEquals("name 1", ab.getPersonAt(0).getName());
         assertEquals("name1@example.com", ab.getPersonAt(0).getEmail());
         assertEquals(5, ab.getPersonAt(0).getId());
         assertEquals("xxx-zzz-1111", ab.getPersonAt(0).getPhoneAt(0).getNumber());
-        assertEquals(LightProtoAddressbook.Person.PhoneType.HOME, ab.getPersonAt(0).getPhoneAt(0).getType());
+        assertEquals(Person.PhoneType.HOME, ab.getPersonAt(0).getPhoneAt(0).getType());
         assertEquals("name 2", ab.getPersonAt(1).getName());
         assertEquals("name2@example.com", ab.getPersonAt(1).getEmail());
         assertEquals(6, ab.getPersonAt(1).getId());
         assertEquals("xxx-zzz-2222", ab.getPersonAt(1).getPhoneAt(0).getNumber());
-        assertEquals(LightProtoAddressbook.Person.PhoneType.HOME, ab.getPersonAt(0).getPhoneAt(0).getType());
+        assertEquals(Person.PhoneType.HOME, ab.getPersonAt(0).getPhoneAt(0).getType());
 
         AddressBookProtos.AddressBook.Builder pbab = AddressBookProtos.AddressBook.newBuilder();
         AddressBookProtos.Person.Builder pb_p1 = AddressBookProtos.Person.newBuilder();
@@ -100,7 +101,7 @@ public class AddressBookTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoAddressbook.AddressBook parsed = new LightProtoAddressbook.AddressBook();
+        AddressBook parsed = new AddressBook();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertEquals(2, parsed.getPersonsCount());
@@ -108,11 +109,11 @@ public class AddressBookTest {
         assertEquals("name1@example.com", parsed.getPersonAt(0).getEmail());
         assertEquals(5, parsed.getPersonAt(0).getId());
         assertEquals("xxx-zzz-1111", parsed.getPersonAt(0).getPhoneAt(0).getNumber());
-        assertEquals(LightProtoAddressbook.Person.PhoneType.HOME, parsed.getPersonAt(0).getPhoneAt(0).getType());
+        assertEquals(Person.PhoneType.HOME, parsed.getPersonAt(0).getPhoneAt(0).getType());
         assertEquals("name 2", parsed.getPersonAt(1).getName());
         assertEquals("name2@example.com", parsed.getPersonAt(1).getEmail());
         assertEquals(6, parsed.getPersonAt(1).getId());
         assertEquals("xxx-zzz-2222", parsed.getPersonAt(1).getPhoneAt(0).getNumber());
-        assertEquals(LightProtoAddressbook.Person.PhoneType.HOME, parsed.getPersonAt(1).getPhoneAt(0).getType());
+        assertEquals(Person.PhoneType.HOME, parsed.getPersonAt(1).getPhoneAt(0).getType());
     }
 }

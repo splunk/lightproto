@@ -27,6 +27,9 @@ public class LightProtoMojo extends AbstractMojo {
     @Parameter(property = "classPrefix", defaultValue = "", required = false)
     private String classPrefix;
 
+    @Parameter(property = "singleOuterClass", defaultValue = "false", required = false)
+    private boolean singleOuterClass;
+
     @Parameter(property = "sources", required = false)
     private List<File> sources;
 
@@ -35,12 +38,7 @@ public class LightProtoMojo extends AbstractMojo {
 
     private void generate(List<File> protoFiles, File outputDirectory) throws MojoExecutionException {
         try {
-            if (!outputDirectory.exists()) {
-                outputDirectory.mkdirs();
-            }
-
-            List<File> generatedFiles = LightProtoGenerator.generate(protoFiles, outputDirectory, classPrefix);
-            getLog().info("Generated Java files: " + generatedFiles);
+            LightProtoGenerator.generate(protoFiles, outputDirectory, classPrefix, singleOuterClass);
         } catch (Exception e) {
             getLog().error("Failed to generate lightproto code for " + protoFiles + ": " + e.getMessage(), e);
             throw new MojoExecutionException("Failed to generate lightproto code for " + protoFiles, e);

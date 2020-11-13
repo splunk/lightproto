@@ -12,14 +12,16 @@ import static io.lightproto.generator.Util.camelCase;
 public class LightProtoMessage {
 
     private final Message message;
+    private final boolean isNested;
     private final List<LightProtoEnum> enums;
     private final List<LightProtoField> fields;
     private final List<LightProtoMessage> nestedMessages;
 
-    public LightProtoMessage(Message message) {
+    public LightProtoMessage(Message message, boolean isNested) {
         this.message = message;
+        this.isNested = isNested;
         this.enums = message.getNestedEnumGroups().stream().map(LightProtoEnum::new).collect(Collectors.toList());
-        this.nestedMessages = message.getNestedMessages().stream().map(LightProtoMessage::new).collect(Collectors.toList());
+        this.nestedMessages = message.getNestedMessages().stream().map(m -> new LightProtoMessage(m, true)).collect(Collectors.toList());
 
         this.fields = new ArrayList<>();
         for (int i = 0; i < message.getFields().size(); i++) {
@@ -27,8 +29,12 @@ public class LightProtoMessage {
         }
     }
 
+    public String getName() {
+        return message.getName();
+    }
+
     public void generate(PrintWriter w) {
-        w.format("    public static class %s {\n", message.getName());
+        w.format("    public %s final class %s {\n", isNested ? "static" : "", message.getName());
 
         enums.forEach(e -> e.generate(w));
         nestedMessages.forEach(nm -> nm.generate(w));

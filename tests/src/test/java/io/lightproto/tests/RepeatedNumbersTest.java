@@ -37,7 +37,7 @@ public class RepeatedNumbersTest {
     }
 
 
-    private void verify(LightProtoNumbers.Numbers lpn, NumbersOuterClass.Numbers pbn) throws Exception {
+    private void verify(Numbers lpn, NumbersOuterClass.Numbers pbn) throws Exception {
         assertEquals(pbn.getSerializedSize(), lpn.getSerializedSize());
 
         lpn.writeTo(bb1);
@@ -47,7 +47,7 @@ public class RepeatedNumbersTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoNumbers.Numbers parsed = new LightProtoNumbers.Numbers();
+        Numbers parsed = new Numbers();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertEquals(pbn.hasEnum1(), parsed.hasEnum1());
@@ -107,7 +107,7 @@ public class RepeatedNumbersTest {
 
     @Test
     public void testNumberFields() throws Exception {
-        LightProtoRepeatedNumbers.Repeated lpn = new LightProtoRepeatedNumbers.Repeated();
+        Repeated lpn = new Repeated();
         RepeatedNumbers.Repeated.Builder pbn = RepeatedNumbers.Repeated.newBuilder();
 
         assertFalse(lpn.hasEnum1());
@@ -158,9 +158,8 @@ public class RepeatedNumbersTest {
         assertException(() -> lpn.getXSint32At(0));
         assertException(() -> lpn.getXSint64At(0));
 
-
-        lpn.addEnum1(LightProtoRepeatedNumbers.Repeated.Enum.X2_1);
-        lpn.addEnum1(LightProtoRepeatedNumbers.Repeated.Enum.X2_2);
+        lpn.addEnum1(Repeated.Enum.X2_1);
+        lpn.addEnum1(Repeated.Enum.X2_2);
         lpn.addXBool(true);
         lpn.addXBool(false);
         lpn.addXDouble(1.0);
@@ -246,8 +245,8 @@ public class RepeatedNumbersTest {
         assertEquals(2, lpn.getXSint32sCount());
         assertEquals(2, lpn.getXSint64sCount());
 
-        assertEquals(LightProtoRepeatedNumbers.Repeated.Enum.X2_1, lpn.getEnum1At(0));
-        assertEquals(LightProtoRepeatedNumbers.Repeated.Enum.X2_2, lpn.getEnum1At(1));
+        assertEquals(Repeated.Enum.X2_1, lpn.getEnum1At(0));
+        assertEquals(Repeated.Enum.X2_2, lpn.getEnum1At(1));
         assertEquals(true, lpn.getXBoolAt(0));
         assertEquals(false, lpn.getXBoolAt(1));
         assertEquals(1.0, lpn.getXDoubleAt(0));
@@ -284,11 +283,11 @@ public class RepeatedNumbersTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoRepeatedNumbers.Repeated parsed = new LightProtoRepeatedNumbers.Repeated();
+        Repeated parsed = new Repeated();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
-        assertEquals(LightProtoRepeatedNumbers.Repeated.Enum.X2_1, parsed.getEnum1At(0));
-        assertEquals(LightProtoRepeatedNumbers.Repeated.Enum.X2_2, parsed.getEnum1At(1));
+        assertEquals(Repeated.Enum.X2_1, parsed.getEnum1At(0));
+        assertEquals(Repeated.Enum.X2_2, parsed.getEnum1At(1));
         assertEquals(true, parsed.getXBoolAt(0));
         assertEquals(false, parsed.getXBoolAt(1));
         assertEquals(1.0, parsed.getXDoubleAt(0));
@@ -319,7 +318,7 @@ public class RepeatedNumbersTest {
 
     @Test
     public void testNumberFieldsPacked() throws Exception {
-        LightProtoRepeatedNumbers.RepeatedPacked lpn = new LightProtoRepeatedNumbers.RepeatedPacked();
+        RepeatedPacked lpn = new RepeatedPacked();
         RepeatedNumbers.RepeatedPacked.Builder pbn = RepeatedNumbers.RepeatedPacked.newBuilder();
 
         assertFalse(lpn.hasEnum1());
@@ -371,8 +370,8 @@ public class RepeatedNumbersTest {
         assertException(() -> lpn.getXSint64At(0));
 
 
-        lpn.addEnum1(LightProtoRepeatedNumbers.RepeatedPacked.Enum.X2_1);
-        lpn.addEnum1(LightProtoRepeatedNumbers.RepeatedPacked.Enum.X2_2);
+        lpn.addEnum1(RepeatedPacked.Enum.X2_1);
+        lpn.addEnum1(RepeatedPacked.Enum.X2_2);
         lpn.addXBool(true);
         lpn.addXBool(false);
         lpn.addXDouble(1.0);
@@ -458,8 +457,8 @@ public class RepeatedNumbersTest {
         assertEquals(2, lpn.getXSint32sCount());
         assertEquals(2, lpn.getXSint64sCount());
 
-        assertEquals(LightProtoRepeatedNumbers.RepeatedPacked.Enum.X2_1, lpn.getEnum1At(0));
-        assertEquals(LightProtoRepeatedNumbers.RepeatedPacked.Enum.X2_2, lpn.getEnum1At(1));
+        assertEquals(RepeatedPacked.Enum.X2_1, lpn.getEnum1At(0));
+        assertEquals(RepeatedPacked.Enum.X2_2, lpn.getEnum1At(1));
         assertEquals(true, lpn.getXBoolAt(0));
         assertEquals(false, lpn.getXBoolAt(1));
         assertEquals(1.0, lpn.getXDoubleAt(0));
@@ -496,11 +495,11 @@ public class RepeatedNumbersTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoRepeatedNumbers.RepeatedPacked parsed = new LightProtoRepeatedNumbers.RepeatedPacked();
+        RepeatedPacked parsed = new RepeatedPacked();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
-        assertEquals(LightProtoRepeatedNumbers.RepeatedPacked.Enum.X2_1, parsed.getEnum1At(0));
-        assertEquals(LightProtoRepeatedNumbers.RepeatedPacked.Enum.X2_2, parsed.getEnum1At(1));
+        assertEquals(RepeatedPacked.Enum.X2_1, parsed.getEnum1At(0));
+        assertEquals(RepeatedPacked.Enum.X2_2, parsed.getEnum1At(1));
         assertEquals(true, parsed.getXBoolAt(0));
         assertEquals(false, parsed.getXBoolAt(1));
         assertEquals(1.0, parsed.getXDoubleAt(0));

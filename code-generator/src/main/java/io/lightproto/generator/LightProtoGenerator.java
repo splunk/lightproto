@@ -5,8 +5,6 @@ import com.google.common.base.Splitter;
 import io.protostuff.parser.Proto;
 import io.protostuff.parser.ProtoUtil;
 import org.jboss.forge.roaster.Roaster;
-import org.jboss.forge.roaster.model.JavaClass;
-import org.jboss.forge.roaster.model.JavaType;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +19,8 @@ public class LightProtoGenerator {
 
     private static final Logger log = LoggerFactory.getLogger(LightProtoGenerator.class);
 
-    public static final List<File> generate(List<File> inputs, File outputDirectory, String classPrefix) throws Exception {
+    public static final List<File> generate(List<File> inputs, File outputDirectory,
+                                            String classPrefix, boolean useOuterClass) throws Exception {
         List<File> generatedFiles = new ArrayList<>();
         Set<String> javaPackages = new HashSet<>();
 
@@ -30,25 +29,15 @@ public class LightProtoGenerator {
             ProtoUtil.loadFrom(input, proto);
 
             String fileWithoutExtension = Splitter.on(".").splitToList(input.getName()).get(0);
-            String className = Util.camelCaseFirstUpper(classPrefix, fileWithoutExtension);
+            String outerClassName = Util.camelCaseFirstUpper(classPrefix, fileWithoutExtension);
 
             String javaPackageName = proto.getJavaPackageName();
             String javaDir = Joiner.on('/').join(javaPackageName.split("\\."));
-            Path generatedFile = Paths.get(String.format("%s/%s/%s.java", outputDirectory, javaDir, className));
-            generatedFile.toFile().getParentFile().mkdirs();
+            Path targetDir = Paths.get(String.format("%s/%s", outputDirectory, javaDir));
 
-            StringWriter sw = new StringWriter();
-            try (PrintWriter pw = new PrintWriter(sw)) {
-                LightProto lightProto = new LightProto(proto, className);
-                lightProto.generate(pw);
-            }
+            LightProto lightProto = new LightProto(proto, outerClassName, useOuterClass);
+            generatedFiles.addAll(lightProto.generate(targetDir.toFile()));
 
-            String formattedCode = Roaster.format(sw.toString());
-            try (Writer w = Files.newBufferedWriter(generatedFile)) {
-                w.write(formattedCode);
-            }
-            System.out.println("Wrote " + generatedFile);
-            generatedFiles.add(generatedFile.toFile());
             javaPackages.add(javaPackageName);
         }
 
@@ -67,10 +56,5 @@ public class LightProtoGenerator {
         }
 
         return generatedFiles;
-    }
-
-    public static void main(String[] args) throws Exception {
-        generate(Collections.singletonList(new File("./tests/src/main/proto/PulsarApi.proto")),
-                new File("./tests/target/generated-sources/protobuf/java"), "Test");
     }
 }

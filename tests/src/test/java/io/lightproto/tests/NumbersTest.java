@@ -38,12 +38,12 @@ public class NumbersTest {
 
     @Test
     public void testEmpty() throws Exception {
-        LightProtoNumbers.Numbers lpn = new LightProtoNumbers.Numbers();
+        Numbers lpn = new Numbers();
         NumbersOuterClass.Numbers pbn = NumbersOuterClass.Numbers.newBuilder().build();
         verify(lpn, pbn);
     }
 
-    private void verify(LightProtoNumbers.Numbers lpn, NumbersOuterClass.Numbers pbn) throws Exception {
+    private void verify(Numbers lpn, NumbersOuterClass.Numbers pbn) throws Exception {
         assertEquals(pbn.getSerializedSize(), lpn.getSerializedSize());
 
         lpn.writeTo(bb1);
@@ -53,7 +53,7 @@ public class NumbersTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoNumbers.Numbers parsed = new LightProtoNumbers.Numbers();
+        Numbers parsed = new Numbers();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertEquals(pbn.hasEnum1(), parsed.hasEnum1());
@@ -113,7 +113,7 @@ public class NumbersTest {
 
     @Test
     public void testNumberFields() throws Exception {
-        LightProtoNumbers.Numbers lpn = new LightProtoNumbers.Numbers();
+        Numbers lpn = new Numbers();
         NumbersOuterClass.Numbers.Builder pbn = NumbersOuterClass.Numbers.newBuilder();
 
         assertFalse(lpn.hasEnum1());
@@ -151,8 +151,8 @@ public class NumbersTest {
         assertException(() -> lpn.getXSint64());
 
 
-        lpn.setEnum1(LightProtoNumbers.Enum1.X1_1);
-        lpn.setEnum2(LightProtoNumbers.Numbers.Enum2.X2_1);
+        lpn.setEnum1(Enum1.X1_1);
+        lpn.setEnum2(Numbers.Enum2.X2_1);
         lpn.setXBool(true);
         lpn.setXDouble(1.0);
         lpn.setXFixed32(2);
@@ -197,8 +197,8 @@ public class NumbersTest {
         assertTrue(lpn.hasXSint32());
         assertTrue(lpn.hasXSint64());
 
-        assertEquals(LightProtoNumbers.Enum1.X1_1, lpn.getEnum1());
-        assertEquals(LightProtoNumbers.Numbers.Enum2.X2_1, lpn.getEnum2());
+        assertEquals(Enum1.X1_1, lpn.getEnum1());
+        assertEquals(Numbers.Enum2.X2_1, lpn.getEnum2());
         assertEquals(true, lpn.isXBool());
         assertEquals(1.0, lpn.getXDouble());
         assertEquals(2, lpn.getXFixed32());

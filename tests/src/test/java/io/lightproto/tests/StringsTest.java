@@ -28,7 +28,7 @@ public class StringsTest {
 
     @Test
     public void testStrings() throws Exception {
-        LightProtoStrings.S lps = new LightProtoStrings.S()
+        S lps = new S()
                 .setId("id");
         lps.addName("a");
         lps.addName("b");
@@ -57,7 +57,7 @@ public class StringsTest {
 
         assertArrayEquals(b1, b2);
 
-        LightProtoStrings.S parsed = new LightProtoStrings.S();
+        S parsed = new S();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertEquals("id", parsed.getId());
@@ -75,7 +75,7 @@ public class StringsTest {
         strings.add("b");
         strings.add("c");
 
-        LightProtoStrings.S lps = new LightProtoStrings.S()
+        S lps = new S()
                 .setId("id")
                 .addAllNames(strings);
 

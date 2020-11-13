@@ -8,13 +8,14 @@ import java.nio.charset.StandardCharsets;
 class LightProtoCodec {
     static final int TAG_TYPE_MASK = 7;
     static final int TAG_TYPE_BITS = 3;
-
     static final int WIRETYPE_VARINT = 0;
     static final int WIRETYPE_FIXED64 = 1;
     static final int WIRETYPE_LENGTH_DELIMITED = 2;
     static final int WIRETYPE_START_GROUP = 3;
     static final int WIRETYPE_END_GROUP = 4;
     static final int WIRETYPE_FIXED32 = 5;
+    private LightProtoCodec() {
+    }
 
     private static int getTagType(int tag) {
         return tag & TAG_TYPE_MASK;
@@ -254,5 +255,17 @@ class LightProtoCodec {
             default:
                 throw new IllegalArgumentException("Invalid unknonwn tag type: " + tagType);
         }
+    }
+
+    static final class StringHolder {
+        String s;
+        int idx;
+        int len;
+    }
+
+    static final class BytesHolder {
+        ByteBuf b;
+        int idx;
+        int len;
     }
 }
