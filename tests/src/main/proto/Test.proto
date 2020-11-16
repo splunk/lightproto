@@ -1,5 +1,5 @@
 syntax = "proto2";
-package io.lightproto.tests;
+package com.splunk.lightproto.tests;
 
 message Point {
 	required int32 x = 1;

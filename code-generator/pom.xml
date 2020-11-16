@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.lightproto</groupId>
+        <groupId>com.splunk.lightproto</groupId>
         <artifactId>lightproto</artifactId>
         <version>0.1-SNAPSHOT</version>
         <relativePath>..</relativePath>
