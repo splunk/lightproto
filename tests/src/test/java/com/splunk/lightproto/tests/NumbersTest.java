@@ -37,6 +37,13 @@ public class NumbersTest {
     }
 
     @Test
+    public void testEnumValue() throws Exception {
+        assertEquals(Enum1.X1_0_VALUE, Enum1.X1_0.getValue());
+        assertEquals(Enum1.X1_1_VALUE, Enum1.X1_1.getValue());
+        assertEquals(Enum1.X1_2_VALUE, Enum1.X1_2.getValue());
+    }
+
+    @Test
     public void testEmpty() throws Exception {
         Numbers lpn = new Numbers();
         NumbersOuterClass.Numbers pbn = NumbersOuterClass.Numbers.newBuilder().build();

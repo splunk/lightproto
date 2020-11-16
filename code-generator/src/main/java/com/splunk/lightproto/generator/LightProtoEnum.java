@@ -39,6 +39,9 @@ public class LightProtoEnum {
         w.format("                default: throw new IllegalArgumentException(\"Invalid value \" + n + \" for %s enum\");\n", eg.getName());
         w.println("            }");
         w.println("        }");
+        eg.getSortedValues().forEach(v -> {
+            w.format("     public static final int %s_VALUE = %d;\n", v.getName(), v.getNumber());
+        });
         w.println("    }");
         w.println();
     }
