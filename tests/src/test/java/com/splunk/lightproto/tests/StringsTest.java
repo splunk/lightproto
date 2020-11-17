@@ -85,4 +85,19 @@ public class StringsTest {
         assertEquals("c", lps.getNameAt(2));
         assertEquals(new ArrayList<>(strings), lps.getNamesList());
     }
+
+    @Test
+    public void testClearStrings() throws Exception {
+        S lps = new S();
+        lps.addName("a");
+        lps.addName("b");
+        lps.addName("c");
+
+        lps.clear();
+        lps.addName("d");
+        lps.addName("e");
+        assertEquals(2, lps.getNamesCount());
+        assertEquals("d", lps.getNameAt(0));
+        assertEquals("e", lps.getNameAt(1));
+    }
 }

@@ -111,7 +111,7 @@ public class LightProtoRepeatedStringField extends LightProtoAbstractRepeated<Fi
         w.format("        _sh = new LightProtoCodec.StringHolder();\n");
         w.format("        %s.add(_sh);\n", pluralName);
         w.format("    } else {\n");
-        w.format("        _sh = %s.get(_%sCount - 1);\n", pluralName, pluralName);
+        w.format("        _sh = %s.get(_%sCount);\n", pluralName, pluralName);
         w.format("    }\n");
         w.format("    _%sCount++;\n", pluralName);
         w.format("    return _sh;\n");

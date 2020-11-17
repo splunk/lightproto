@@ -104,7 +104,7 @@ public class LightProtoRepeatedBytesField extends LightProtoAbstractRepeated<Fie
         w.format("        _bh = new LightProtoCodec.BytesHolder();\n");
         w.format("        %s.add(_bh);\n", pluralName);
         w.format("    } else {\n");
-        w.format("        _bh = %s.get(_%sCount - 1);\n", pluralName, pluralName);
+        w.format("        _bh = %s.get(_%sCount);\n", pluralName, pluralName);
         w.format("    }\n");
         w.format("    _%sCount++;\n", pluralName);
         w.format("    return _bh;\n");
