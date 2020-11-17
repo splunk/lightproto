@@ -4,7 +4,7 @@ import io.protostuff.parser.Field;
 
 import java.io.PrintWriter;
 
-public class LightProtoRepeatedBytesField extends LightProtoField<Field.Bytes> {
+public class LightProtoRepeatedBytesField extends LightProtoAbstractRepeated<Field.Bytes> {
 
     protected final String pluralName;
     protected final String singularName;
@@ -88,7 +88,6 @@ public class LightProtoRepeatedBytesField extends LightProtoField<Field.Bytes> {
         w.format("        %s = new java.util.ArrayList<LightProtoCodec.BytesHolder>();\n", pluralName);
         w.format("    }\n");
         w.format("    LightProtoCodec.BytesHolder _bh = _%sBytesHolder();\n", Util.camelCase("new", singularName));
-        w.format("    _bitField%d |= %s;\n", bitFieldIndex(), fieldMask());
         w.format("    _cachedSize = -1;\n");
         w.format("    _bh.b = %s;\n", singularName);
         w.format("    _bh.idx = -1;\n");

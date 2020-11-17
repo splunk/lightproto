@@ -36,7 +36,6 @@ public class StringsTest {
         lps.addName("c");
 
         assertEquals("id", lps.getId());
-        assertTrue(lps.hasNames());
         assertEquals(3, lps.getNamesCount());
         assertEquals("a", lps.getNameAt(0));
         assertEquals("b", lps.getNameAt(1));
@@ -62,7 +61,6 @@ public class StringsTest {
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertEquals("id", parsed.getId());
-        assertTrue(parsed.hasNames());
         assertEquals(3, parsed.getNamesCount());
         assertEquals("a", parsed.getNameAt(0));
         assertEquals("b", parsed.getNameAt(1));
@@ -81,7 +79,6 @@ public class StringsTest {
                 .addAllNames(strings);
 
         assertEquals("id", lps.getId());
-        assertTrue(lps.hasNames());
         assertEquals(3, lps.getNamesCount());
         assertEquals("a", lps.getNameAt(0));
         assertEquals("b", lps.getNameAt(1));

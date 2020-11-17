@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 
 import static com.splunk.lightproto.generator.Util.camelCase;
 
-public class LightProtoRepeatedStringField extends LightProtoField<Field.String> {
+public class LightProtoRepeatedStringField extends LightProtoAbstractRepeated<Field.String> {
 
     protected final String pluralName;
     protected final String singularName;
@@ -88,7 +88,6 @@ public class LightProtoRepeatedStringField extends LightProtoField<Field.String>
         w.format("        %s = new java.util.ArrayList<LightProtoCodec.StringHolder>();\n", pluralName);
         w.format("    }\n");
         w.format("    LightProtoCodec.StringHolder _sh = _%sStringHolder();\n", camelCase("new", singularName));
-        w.format("    _bitField%d |= %s;\n", bitFieldIndex(), fieldMask());
         w.format("    _cachedSize = -1;\n");
         w.format("    _sh.s = %s;\n", singularName);
         w.format("    _sh.idx = -1;\n");

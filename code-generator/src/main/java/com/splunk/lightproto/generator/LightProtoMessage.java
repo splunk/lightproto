@@ -71,7 +71,9 @@ public class LightProtoMessage {
 
         for (LightProtoField field : fields) {
             w.format("                case %s:\n", field.tagName());
-            w.format("                    _bitField%d |= %s;\n", field.bitFieldIndex(), field.fieldMask());
+            if (!field.isRepeated()) {
+                w.format("                    _bitField%d |= %s;\n", field.bitFieldIndex(), field.fieldMask());
+            }
             field.parse(w);
             w.format("                    break;\n");
         }
@@ -115,9 +117,13 @@ public class LightProtoMessage {
         w.format("public %s copyFrom(%s _other) {\n", message.getName(), message.getName());
         w.format("            _cachedSize = -1;\n");
         for (LightProtoField f : fields) {
-            w.format("    if (_other.%s()) {\n", Util.camelCase("has", f.ccName));
-            f.copy(w);
-            w.format("    }\n");
+            if (f.isRepeated()) {
+                f.copy(w);
+            } else {
+                w.format("    if (_other.%s()) {\n", Util.camelCase("has", f.ccName));
+                f.copy(w);
+                w.format("    }\n");
+            }
         }
 
         w.format("            return this;\n");
@@ -131,13 +137,14 @@ public class LightProtoMessage {
         }
         w.format("            int _writeIdx = _b.writerIndex();\n");
         for (LightProtoField f : fields) {
-            if (!f.isRequired()) {
+
+            if (f.isRequired() || f.isRepeated()) {
+                // If required, skip the has() check
+                f.serialize(w);
+            } else {
                 w.format("            if (%s()) {\n", Util.camelCase("has", f.field.getName()));
                 f.serialize(w);
                 w.format("            }\n");
-            } else {
-                // If required, skip the has() check
-                f.serialize(w);
             }
         }
 
@@ -154,7 +161,7 @@ public class LightProtoMessage {
 
         w.format("    int _size = 0;\n");
         fields.forEach(field -> {
-            if (field.isRequired()) {
+            if (field.isRequired() || field.isRepeated()) {
                 field.serializedSize(w);
             } else {
                 w.format("        if (%s()) {\n", Util.camelCase("has", field.field.getName()));

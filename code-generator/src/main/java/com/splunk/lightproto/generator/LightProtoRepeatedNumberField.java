@@ -4,7 +4,7 @@ import io.protostuff.parser.Field;
 
 import java.io.PrintWriter;
 
-public class LightProtoRepeatedNumberField extends LightProtoField<Field<?>> {
+public class LightProtoRepeatedNumberField extends LightProtoAbstractRepeated<Field<?>> {
 
     protected final String pluralName;
     protected final String singularName;
@@ -80,7 +80,6 @@ public class LightProtoRepeatedNumberField extends LightProtoField<Field<?>> {
         w.format("    if (%s.length == _%sCount) {\n", pluralName, pluralName);
         w.format("        %s = java.util.Arrays.copyOf(%s, _%sCount * 2);\n", pluralName, pluralName, pluralName);
         w.format("    }\n");
-        w.format("    _bitField%d |= %s;\n", bitFieldIndex(), fieldMask());
         w.format("    _cachedSize = -1;\n");
         w.format("    %s[_%sCount++] = %s;\n", pluralName, pluralName, singularName);
         w.format("}\n");

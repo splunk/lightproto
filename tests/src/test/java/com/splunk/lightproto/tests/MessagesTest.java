@@ -43,7 +43,6 @@ public class MessagesTest {
                 .setXx().setN(5);
 
         assertTrue(lpm.hasX());
-        assertTrue(lpm.hasItems());
         assertTrue(lpm.getX().hasA());
         assertTrue(lpm.getX().hasB());
         assertEquals(2, lpm.getItemsCount());
@@ -102,7 +101,6 @@ public class MessagesTest {
         parsed.parseFrom(bb1, bb1.readableBytes());
 
         assertTrue(parsed.hasX());
-        assertTrue(parsed.hasItems());
         assertTrue(parsed.getX().hasA());
         assertTrue(parsed.getX().hasB());
         assertEquals(2, parsed.getItemsCount());

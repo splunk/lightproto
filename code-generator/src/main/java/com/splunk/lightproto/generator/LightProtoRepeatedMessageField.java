@@ -4,7 +4,7 @@ import io.protostuff.parser.MessageField;
 
 import java.io.PrintWriter;
 
-public class LightProtoRepeatedMessageField extends LightProtoField<MessageField> {
+public class LightProtoRepeatedMessageField extends LightProtoAbstractRepeated<MessageField> {
 
     protected final String pluralName;
     protected final String singularName;
@@ -74,7 +74,6 @@ public class LightProtoRepeatedMessageField extends LightProtoField<MessageField
         w.format("    if (%s.size() == _%sCount) {\n", pluralName, pluralName);
         w.format("        %s.add(new %s());\n", pluralName, field.getJavaType());
         w.format("    }\n");
-        w.format("    _bitField%d |= %s;\n", bitFieldIndex(), fieldMask());
         w.format("    _cachedSize = -1;\n");
         w.format("    return %s.get(_%sCount++);\n", pluralName, pluralName);
         w.format("}\n");

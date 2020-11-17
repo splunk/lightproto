@@ -111,22 +111,6 @@ public class RepeatedNumbersTest {
         Repeated lpn = new Repeated();
         RepeatedNumbers.Repeated.Builder pbn = RepeatedNumbers.Repeated.newBuilder();
 
-        assertFalse(lpn.hasEnum1());
-        assertFalse(lpn.hasXBool());
-        assertFalse(lpn.hasXDouble());
-        assertFalse(lpn.hasXFixed32());
-        assertFalse(lpn.hasXFixed64());
-        assertFalse(lpn.hasXSfixed32());
-        assertFalse(lpn.hasXSfixed64());
-        assertFalse(lpn.hasXFloat());
-        assertFalse(lpn.hasXInt32());
-        assertFalse(lpn.hasXInt64());
-        assertFalse(lpn.hasXInt32());
-        assertFalse(lpn.hasXUint64());
-        assertFalse(lpn.hasXUint32());
-        assertFalse(lpn.hasXSint32());
-        assertFalse(lpn.hasXSint64());
-
         assertEquals(0, lpn.getEnum1sCount());
         assertEquals(0, lpn.getXBoolsCount());
         assertEquals(0, lpn.getXDoublesCount());
@@ -216,19 +200,6 @@ public class RepeatedNumbersTest {
         pbn.addXSint32(-12);
         pbn.addXSint64(-12L);
         pbn.addXSint64(-13L);
-
-        assertTrue(lpn.hasEnum1());
-        assertTrue(lpn.hasXBool());
-        assertTrue(lpn.hasXDouble());
-        assertTrue(lpn.hasXFixed32());
-        assertTrue(lpn.hasXFixed64());
-        assertTrue(lpn.hasXSfixed32());
-        assertTrue(lpn.hasXSfixed64());
-        assertTrue(lpn.hasXFloat());
-        assertTrue(lpn.hasXInt32());
-        assertTrue(lpn.hasXInt64());
-        assertTrue(lpn.hasXSint32());
-        assertTrue(lpn.hasXSint64());
 
         assertEquals(2, lpn.getEnum1sCount());
         assertEquals(2, lpn.getXBoolsCount());
@@ -322,22 +293,6 @@ public class RepeatedNumbersTest {
         RepeatedPacked lpn = new RepeatedPacked();
         RepeatedNumbers.RepeatedPacked.Builder pbn = RepeatedNumbers.RepeatedPacked.newBuilder();
 
-        assertFalse(lpn.hasEnum1());
-        assertFalse(lpn.hasXBool());
-        assertFalse(lpn.hasXDouble());
-        assertFalse(lpn.hasXFixed32());
-        assertFalse(lpn.hasXFixed64());
-        assertFalse(lpn.hasXSfixed32());
-        assertFalse(lpn.hasXSfixed64());
-        assertFalse(lpn.hasXFloat());
-        assertFalse(lpn.hasXInt32());
-        assertFalse(lpn.hasXInt64());
-        assertFalse(lpn.hasXInt32());
-        assertFalse(lpn.hasXUint64());
-        assertFalse(lpn.hasXUint32());
-        assertFalse(lpn.hasXSint32());
-        assertFalse(lpn.hasXSint64());
-
         assertEquals(0, lpn.getEnum1sCount());
         assertEquals(0, lpn.getXBoolsCount());
         assertEquals(0, lpn.getXDoublesCount());
@@ -428,19 +383,6 @@ public class RepeatedNumbersTest {
         pbn.addXSint32(-12);
         pbn.addXSint64(-12L);
         pbn.addXSint64(-13L);
-
-        assertTrue(lpn.hasEnum1());
-        assertTrue(lpn.hasXBool());
-        assertTrue(lpn.hasXDouble());
-        assertTrue(lpn.hasXFixed32());
-        assertTrue(lpn.hasXFixed64());
-        assertTrue(lpn.hasXSfixed32());
-        assertTrue(lpn.hasXSfixed64());
-        assertTrue(lpn.hasXFloat());
-        assertTrue(lpn.hasXInt32());
-        assertTrue(lpn.hasXInt64());
-        assertTrue(lpn.hasXSint32());
-        assertTrue(lpn.hasXSint64());
 
         assertEquals(2, lpn.getEnum1sCount());
         assertEquals(2, lpn.getXBoolsCount());

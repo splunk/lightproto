@@ -99,7 +99,6 @@ public class BytesTest {
         lpb.addExtraItem(new byte[]{1, 2, 3});
         lpb.addExtraItem(new byte[]{4, 5, 6, 7});
 
-        assertTrue(lpb.hasExtraItems());
         assertEquals(2, lpb.getExtraItemsCount());
         assertEquals(3, lpb.getExtraItemSizeAt(0));
         assertEquals(4, lpb.getExtraItemSizeAt(1));
@@ -122,7 +121,6 @@ public class BytesTest {
         B parsed = new B();
         parsed.parseFrom(bb1, bb1.readableBytes());
 
-        assertTrue(parsed.hasExtraItems());
         assertEquals(2, parsed.getExtraItemsCount());
         assertEquals(3, parsed.getExtraItemSizeAt(0));
         assertEquals(4, parsed.getExtraItemSizeAt(1));
