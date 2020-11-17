@@ -46,6 +46,18 @@ public class LightProtoRepeatedStringField extends LightProtoField<Field.String>
         w.format("    }\n");
         w.format("    return _sh.s;\n");
         w.format("}\n");
+
+        w.format("public java.util.List<String> %s() {\n", Util.camelCase("get", pluralName, "list"));
+        w.format("    if (_%sCount == 0) {\n", pluralName);
+        w.format("        return java.util.Collections.emptyList();\n");
+        w.format("    } else {\n");
+        w.format("        java.util.List<String> _l = new java.util.ArrayList<>();\n");
+        w.format("        for (int i = 0; i < _%sCount; i++) {\n", pluralName, pluralName);
+        w.format("            _l.add(%s(i));\n", camelCase("get", singularName, "at"));
+        w.format("        }\n");
+        w.format("        return _l;\n");
+        w.format("    }\n");
+        w.format("}\n");
     }
 
     @Override

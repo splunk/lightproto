@@ -6,6 +6,7 @@ import io.netty.buffer.Unpooled;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
@@ -85,5 +86,6 @@ public class StringsTest {
         assertEquals("a", lps.getNameAt(0));
         assertEquals("b", lps.getNameAt(1));
         assertEquals("c", lps.getNameAt(2));
+        assertEquals(new ArrayList<>(strings), lps.getNamesList());
     }
 }
