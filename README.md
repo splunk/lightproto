@@ -17,16 +17,20 @@
 ### Benchmark
 
 ```
+java -jar benchmark/target/benchmarks.jar
+
 Benchmark                                         Mode  Cnt   Score    Error   Units
-ProtoBenchmark.lightProtoDeserialize             thrpt    3  7.711 ± 2.740  ops/us
-ProtoBenchmark.lightProtoSerialize               thrpt    3  3.895 ± 1.255  ops/us
-ProtoBenchmark.protobufDeserialize               thrpt    3  2.310 ± 0.391  ops/us
-ProtoBenchmark.protobufSerialize                 thrpt    3  2.077 ± 0.696  ops/us
-SimpleBenchmark.lightProtoDeserialize            thrpt    3  35.241 ±  7.328  ops/us
-SimpleBenchmark.lightProtoDeserializeReadString  thrpt    3  15.976 ±  1.999  ops/us
-SimpleBenchmark.lightProtoSerialize              thrpt    3  35.568 ± 15.120  ops/us
-SimpleBenchmark.protobufDeserialize              thrpt    3   7.901 ±  0.472  ops/us
-SimpleBenchmark.protobufSerialize                thrpt    3  18.551 ±  2.959  ops/us
-StringEncodingBenchmark.jdkEncoding              thrpt   10  14.862 ±  0.538  ops/us
-StringEncodingBenchmark.nettyEncoding            thrpt   10  25.161 ±  1.313  ops/us
+ProtoBenchmark.lightProtoDeserialize             thrpt    3   8.445 ±  1.734  ops/us
+ProtoBenchmark.lightProtoSerialize               thrpt    3   4.056 ±  1.628  ops/us
+ProtoBenchmark.protobufDeserialize               thrpt    3   2.465 ±  0.682  ops/us
+ProtoBenchmark.protobufSerialize                 thrpt    3   2.242 ±  0.186  ops/us
+SimpleBenchmark.lightProtoDeserialize            thrpt    3  37.414 ±  4.980  ops/us
+SimpleBenchmark.lightProtoDeserializeReadString  thrpt    3  17.367 ±  1.790  ops/us
+SimpleBenchmark.lightProtoSerialize              thrpt    3  35.473 ±  6.325  ops/us
+SimpleBenchmark.protobufDeserialize              thrpt    3   8.255 ±  1.104  ops/us
+SimpleBenchmark.protobufSerialize                thrpt    3  18.960 ±  4.626  ops/us
+StringEncodingBenchmark.jdkEncoding              thrpt   10  14.031 ±  0.394  ops/us
+StringEncodingBenchmark.jdkEncodingAscii         thrpt   10  19.279 ±  0.448  ops/us
+StringEncodingBenchmark.nettyEncoding            thrpt   10  27.273 ±  0.988  ops/us
+StringEncodingBenchmark.nettyEncodingAscii       thrpt   10  36.140 ±  0.693  ops/us
 ```
