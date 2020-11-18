@@ -66,6 +66,7 @@ public abstract class LightProtoField<FieldType extends Field<?>> {
     public void tags(PrintWriter w) {
         w.format("        private static final int %s = %d;\n", fieldNumber(), field.getNumber());
         w.format("        private static final int %s = (%s << LightProtoCodec.TAG_TYPE_BITS) | %s;\n", tagName(), fieldNumber(), typeTag());
+        w.format("        private static final int %s_SIZE = LightProtoCodec.computeVarIntSize(%s);\n", tagName(), tagName());
         if (!field.isRepeated()) {
             w.format("        private static final int %s = 1 << (%d %% 32);\n", fieldMask(), index);
         }

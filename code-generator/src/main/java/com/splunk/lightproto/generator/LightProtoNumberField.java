@@ -198,7 +198,7 @@ public class LightProtoNumberField extends LightProtoField<Field<?>> {
 
     @Override
     public void serializedSize(PrintWriter w) {
-        w.format("_size += LightProtoCodec.computeVarIntSize(%s);\n", tagName());
+        w.format("_size += %s_SIZE;\n", tagName());
         w.format("_size += %s;\n", serializedSizeOfNumber(field, ccName));
     }
 

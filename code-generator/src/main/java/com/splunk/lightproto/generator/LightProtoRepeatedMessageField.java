@@ -95,7 +95,7 @@ public class LightProtoRepeatedMessageField extends LightProtoAbstractRepeated<M
 
         w.format("for (int i = 0; i < _%sCount; i++) {\n", pluralName);
         w.format("     %s _item = %s.get(i);\n", field.getJavaType(), pluralName);
-        w.format("     _size += LightProtoCodec.computeVarIntSize(%s);\n", tagName());
+        w.format("     _size += %s_SIZE;\n", tagName());
         w.format("     int %s = _item.getSerializedSize();\n", tmpName);
         w.format("     _size += LightProtoCodec.computeVarIntSize(%s) + %s;\n", tmpName, tmpName);
         w.format("}\n");

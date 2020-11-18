@@ -122,7 +122,7 @@ public class LightProtoRepeatedBytesField extends LightProtoAbstractRepeated<Fie
     public void serializedSize(PrintWriter w) {
         w.format("for (int i = 0; i < _%sCount; i++) {\n", pluralName);
         w.format("    LightProtoCodec.BytesHolder _bh = %s.get(i);\n", pluralName);
-        w.format("    _size += LightProtoCodec.computeVarIntSize(%s);\n", tagName());
+        w.format("    _size += %s_SIZE;\n", tagName());
         w.format("    _size += LightProtoCodec.computeVarIntSize(_bh.len) + _bh.len;\n");
         w.format("}\n");
     }

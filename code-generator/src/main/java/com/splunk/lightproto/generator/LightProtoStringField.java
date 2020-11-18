@@ -64,7 +64,7 @@ public class LightProtoStringField extends LightProtoField<Field.String> {
 
     @Override
     public void serializedSize(PrintWriter w) {
-        w.format("_size += LightProtoCodec.computeVarIntSize(%s);\n", tagName());
+        w.format("_size += %s_SIZE;\n", tagName());
         w.format("_size += LightProtoCodec.computeVarIntSize(_%sBufferLen);\n", ccName);
         w.format("_size += _%sBufferLen;\n", ccName);
     }

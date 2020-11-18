@@ -98,7 +98,7 @@ public class LightProtoRepeatedNumberField extends LightProtoAbstractRepeated<Fi
 
         w.format("for (int i = 0; i < _%sCount; i++) {\n", pluralName);
         w.format("    %s _item = %s[i];\n", field.getJavaType(), pluralName);
-        w.format("    _size += LightProtoCodec.computeVarIntSize(%s);\n", tagName());
+        w.format("    _size += %s_SIZE;\n", tagName());
         w.format("    _size += %s;\n", LightProtoNumberField.serializedSizeOfNumber(field, "_item"));
         w.format("}\n");
     }
