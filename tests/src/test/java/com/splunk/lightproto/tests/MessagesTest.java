@@ -149,4 +149,20 @@ public class MessagesTest {
         assertEquals("k3", lp.getItemAt(2).getK());
         assertEquals("v3", lp.getItemAt(2).getV());
     }
+
+    @Test
+    public void testClearNestedMessage() throws Exception {
+        M m = new M();
+        m.setX()
+                .setA("a")
+                .setB("b");
+
+        m.clear();
+        assertFalse(m.hasX());
+
+        m.setX();
+        assertTrue(m.hasX());
+        assertFalse(m.getX().hasA());
+        assertFalse(m.getX().hasB());
+    }
 }

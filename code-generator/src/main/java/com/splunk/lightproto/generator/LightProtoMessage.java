@@ -99,14 +99,14 @@ public class LightProtoMessage {
 
     private void generateClear(PrintWriter w) {
         w.format("        public %s clear() {\n", message.getName());
+        for (LightProtoField f : fields) {
+            f.clear(w);
+        }
+
         w.format("            _parsedBuffer = null;\n");
         w.format("            _cachedSize = -1;\n");
         for (int i = 0; i < bitFieldsCount(); i++) {
             w.format("            _bitField%d = 0;\n", i);
-        }
-
-        for (LightProtoField f : fields) {
-            f.clear(w);
         }
 
         w.format("            return this;\n");
