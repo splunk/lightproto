@@ -15,6 +15,7 @@
  */
 package com.splunk.lightproto.generator;
 
+import io.protostuff.parser.EnumField;
 import io.protostuff.parser.Field;
 import io.protostuff.parser.MessageField;
 
@@ -38,7 +39,9 @@ public abstract class LightProtoField<FieldType extends Field<?>> {
                 return new LightProtoRepeatedMessageField((MessageField) field, index);
             } else if (field.isStringField()) {
                 return new LightProtoRepeatedStringField((Field.String) field, index);
-            } else if (field.isNumberField() || field.isEnumField() || field.isBoolField()) {
+            } else if (field.isEnumField()) {
+                return new LightProtoRepeatedEnumField(field, index);
+            } else if (field.isNumberField() || field.isBoolField()) {
                 return new LightProtoRepeatedNumberField(field, index);
             } else if (field.isBytesField()) {
                 return new LightProtoRepeatedBytesField((Field.Bytes) field, index);
@@ -49,7 +52,9 @@ public abstract class LightProtoField<FieldType extends Field<?>> {
             return new LightProtoBytesField((Field.Bytes) field, index);
         } else if (field.isStringField()) {
             return new LightProtoStringField((Field.String) field, index);
-        } else if (field.isNumberField() || field.isEnumField()) {
+        } else if (field.isEnumField()) {
+            return new LightProtoEnumField(field, index);
+        } else if (field.isNumberField()) {
             return new LightProtoNumberField(field, index);
         } else if (field.isBoolField()) {
             return new LightProtoBooleanField(field, index);
@@ -64,6 +69,10 @@ public abstract class LightProtoField<FieldType extends Field<?>> {
 
     public boolean isRepeated() {
         return field.isRepeated();
+    }
+
+    public boolean isEnum() {
+        return field.isEnumField();
     }
 
     public boolean isRequired() {

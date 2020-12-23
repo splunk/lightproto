@@ -51,7 +51,7 @@ public class LightProtoEnum {
         eg.getSortedValues().forEach(v -> {
             w.format("                case %d: return %s;\n", v.getNumber(), v.getName());
         });
-        w.format("                default: throw new IllegalArgumentException(\"Invalid value \" + n + \" for %s enum\");\n", eg.getName());
+        w.println("                default: return null;\n");
         w.println("            }");
         w.println("        }");
         eg.getSortedValues().forEach(v -> {

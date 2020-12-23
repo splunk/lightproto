@@ -86,7 +86,7 @@ public class LightProtoMessage {
 
         for (LightProtoField field : fields) {
             w.format("                case %s:\n", field.tagName());
-            if (!field.isRepeated()) {
+            if (!field.isRepeated() && !field.isEnum()) {
                 w.format("                    _bitField%d |= %s;\n", field.bitFieldIndex(), field.fieldMask());
             }
             field.parse(w);

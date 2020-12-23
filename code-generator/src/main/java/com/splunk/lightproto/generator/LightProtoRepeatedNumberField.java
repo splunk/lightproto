@@ -111,11 +111,22 @@ public class LightProtoRepeatedNumberField extends LightProtoAbstractRepeated<Fi
     public void serializedSize(PrintWriter w) {
         String tmpName = Util.camelCase("_msgSize", field.getName());
 
-        w.format("for (int i = 0; i < _%sCount; i++) {\n", pluralName);
-        w.format("    %s _item = %s[i];\n", field.getJavaType(), pluralName);
-        w.format("    _size += %s_SIZE;\n", tagName());
-        w.format("    _size += %s;\n", LightProtoNumberField.serializedSizeOfNumber(field, "_item"));
-        w.format("}\n");
+        if (field.getOption("packed") == Boolean.TRUE) {
+            w.format("    _size += %s_SIZE;\n", tagName());
+            w.format("    int _%sSize = 0;\n", pluralName);
+            w.format("for (int i = 0; i < _%sCount; i++) {\n", pluralName);
+            w.format("    %s _item = %s[i];\n", field.getJavaType(), pluralName);
+            w.format("    _%sSize += %s;\n", pluralName, LightProtoNumberField.serializedSizeOfNumber(field, "_item"));
+            w.format("}\n");
+            w.format("    _size += LightProtoCodec.computeVarIntSize(_%sSize);\n", pluralName);
+            w.format("    _size += _%sSize;\n", pluralName);
+        } else {
+            w.format("for (int i = 0; i < _%sCount; i++) {\n", pluralName);
+            w.format("    %s _item = %s[i];\n", field.getJavaType(), pluralName);
+            w.format("    _size += %s_SIZE;\n", tagName());
+            w.format("    _size += %s;\n", LightProtoNumberField.serializedSizeOfNumber(field, "_item"));
+            w.format("}\n");
+        }
     }
 
     @Override
