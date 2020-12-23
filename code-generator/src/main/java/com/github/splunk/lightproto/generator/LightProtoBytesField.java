@@ -73,7 +73,7 @@ public class LightProtoBytesField extends LightProtoField<Field.Bytes> {
         w.format("public byte[] %s() {\n", Util.camelCase("get", ccName));
         w.format("    io.netty.buffer.ByteBuf _b = %s();\n", Util.camelCase("get", ccName, "slice"));
         w.format("    byte[] res = new byte[_b.readableBytes()];\n");
-        w.format("    _b.getBytes(0, res);\n", ccName);
+        w.format("    _b.getBytes(0, res);\n");
         w.format("    return res;\n");
         w.format("}\n");
 

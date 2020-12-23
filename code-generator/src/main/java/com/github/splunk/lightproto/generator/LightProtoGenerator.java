@@ -32,10 +32,8 @@ import java.util.*;
 
 public class LightProtoGenerator {
 
-    private static final Logger log = LoggerFactory.getLogger(LightProtoGenerator.class);
-
-    public static final List<File> generate(List<File> inputs, File outputDirectory,
-                                            String classPrefix, boolean useOuterClass) throws Exception {
+    public static List<File> generate(List<File> inputs, File outputDirectory,
+                                      String classPrefix, boolean useOuterClass) throws Exception {
         List<File> generatedFiles = new ArrayList<>();
         Set<String> javaPackages = new HashSet<>();
 
