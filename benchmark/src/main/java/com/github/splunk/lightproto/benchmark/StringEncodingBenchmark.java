@@ -42,7 +42,7 @@ public class StringEncodingBenchmark {
     private static final String testStringAscii = "Neque porro quisquam est qui dolorem ipsum";
 
     @Benchmark
-    public void jdkEncoding(Blackhole bh) throws Exception {
+    public void jdkEncoding(Blackhole bh) {
         byte[] bytes = testString.getBytes(StandardCharsets.UTF_8);
         bh.consume(bytes);
     }
@@ -50,20 +50,20 @@ public class StringEncodingBenchmark {
     ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer(1024);
 
     @Benchmark
-    public void nettyEncoding(Blackhole bh) throws Exception {
+    public void nettyEncoding(Blackhole bh) {
         buffer.clear();
         ByteBufUtil.writeUtf8(buffer, testString);
         bh.consume(buffer);
     }
 
     @Benchmark
-    public void jdkEncodingAscii(Blackhole bh) throws Exception {
+    public void jdkEncodingAscii(Blackhole bh) {
         byte[] bytes = testStringAscii.getBytes(StandardCharsets.UTF_8);
         bh.consume(bytes);
     }
 
     @Benchmark
-    public void nettyEncodingAscii(Blackhole bh) throws Exception {
+    public void nettyEncodingAscii(Blackhole bh) {
         buffer.clear();
         ByteBufUtil.writeUtf8(buffer, testStringAscii);
         bh.consume(buffer);

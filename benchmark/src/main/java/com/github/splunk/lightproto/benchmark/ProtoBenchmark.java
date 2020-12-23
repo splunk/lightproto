@@ -67,7 +67,7 @@ public class ProtoBenchmark {
 
     private final ByteBuf buffer = PooledByteBufAllocator.DEFAULT.buffer(1024);
     byte[] data = new byte[1024];
-    private ByteBuf serializeByteBuf = Unpooled.wrappedBuffer(serialized);
+    private final ByteBuf serializeByteBuf = Unpooled.wrappedBuffer(serialized);
 
     @Benchmark
     public void protobufSerialize(Blackhole bh) throws Exception {
@@ -109,7 +109,7 @@ public class ProtoBenchmark {
     }
 
     @Benchmark
-    public void lightProtoSerialize(Blackhole bh) throws Exception {
+    public void lightProtoSerialize(Blackhole bh) {
         frame.clear();
 
         Person p1 = frame.addPerson();
@@ -146,7 +146,7 @@ public class ProtoBenchmark {
     }
 
     @Benchmark
-    public void lightProtoDeserialize(Blackhole bh) throws Exception {
+    public void lightProtoDeserialize(Blackhole bh) {
         frame.parseFrom(serializeByteBuf, serializeByteBuf.readableBytes());
         serializeByteBuf.resetReaderIndex();
         bh.consume(frame);
