@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 syntax = "proto2";
-package com.splunk.lightproto.tests;
+package com.github.splunk.lightproto.tests;
 
 enum E1 {
     A1 = 1;

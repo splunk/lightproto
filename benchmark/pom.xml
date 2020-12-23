@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.splunk.lightproto</groupId>
+        <groupId>com.github.splunk.lightproto</groupId>
         <artifactId>lightproto</artifactId>
         <version>0.2-SNAPSHOT</version>
         <relativePath>..</relativePath>

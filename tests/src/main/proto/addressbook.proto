@@ -16,7 +16,7 @@
 syntax = "proto2";
 package tutorial;
 
-option java_package = "com.splunk.lightproto.tests";
+option java_package = "com.github.splunk.lightproto.tests";
 option java_outer_classname = "AddressBookProtos";
 
 message Person {

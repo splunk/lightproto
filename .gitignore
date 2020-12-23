@@ -4,5 +4,6 @@ target
 .classpath
 .idea
 **/*.iml
+**/*.versionsBackup
 
 .DS_Store

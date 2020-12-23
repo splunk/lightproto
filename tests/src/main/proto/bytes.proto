@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 syntax = "proto2";
-package com.splunk.lightproto.tests;
+package com.github.splunk.lightproto.tests;
 
 message B {
     optional bytes payload = 1;
