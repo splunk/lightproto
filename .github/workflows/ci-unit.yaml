@@ -49,4 +49,4 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: build and run tests
-        run: mvn -B -ntp -q license:check install
+        run: mvn -B -ntp license:check install
