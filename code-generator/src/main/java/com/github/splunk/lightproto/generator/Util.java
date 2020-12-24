@@ -47,10 +47,7 @@ public class Util {
 
     public static String camelCaseFirstUpper(String... parts) {
         String s = camelCase(parts);
-        StringBuilder sb = new StringBuilder();
-        sb.append(Character.toUpperCase(s.charAt(0)));
-        sb.append(s.substring(1));
-        return sb.toString();
+        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
 
     public static String upperCase(String... parts) {

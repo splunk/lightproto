@@ -23,7 +23,7 @@
         <groupId>com.github.splunk.lightproto</groupId>
         <artifactId>lightproto</artifactId>
         <version>0.3-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>lightproto-maven-plugin</artifactId>

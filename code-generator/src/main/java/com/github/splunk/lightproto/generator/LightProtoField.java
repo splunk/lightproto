@@ -79,9 +79,7 @@ public abstract class LightProtoField<FieldType extends Field<?>> {
     }
 
     public void docs(PrintWriter w) {
-        field.getDocs().forEach(d -> {
-            w.format("        // %s\n", d);
-        });
+        field.getDocs().forEach(d -> w.format("        // %s\n", d));
     }
 
     abstract public void declaration(PrintWriter w);

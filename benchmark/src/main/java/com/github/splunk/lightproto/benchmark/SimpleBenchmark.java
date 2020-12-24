@@ -54,14 +54,14 @@ public class SimpleBenchmark {
         CodedOutputStream s = CodedOutputStream.newInstance(serialized);
         try {
             frame.writeTo(s);
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
     byte[] data = new byte[1024];
     Frame frame = new Frame();
     ByteBuf buffer = PooledByteBufAllocator.DEFAULT.buffer(1024);
-    private ByteBuf serializeByteBuf = Unpooled.wrappedBuffer(serialized);
+    private final ByteBuf serializeByteBuf = Unpooled.wrappedBuffer(serialized);
 
     @Benchmark
     public void protobufSerialize(Blackhole bh) throws Exception {
@@ -84,7 +84,7 @@ public class SimpleBenchmark {
     }
 
     @Benchmark
-    public void lightProtoSerialize(Blackhole bh) throws Exception {
+    public void lightProtoSerialize(Blackhole bh) {
         frame.clear();
         Point p = frame.setPoint();
         p.setX(1);
@@ -107,14 +107,14 @@ public class SimpleBenchmark {
     }
 
     @Benchmark
-    public void lightProtoDeserialize(Blackhole bh) throws Exception {
+    public void lightProtoDeserialize(Blackhole bh) {
         frame.parseFrom(serializeByteBuf, serializeByteBuf.readableBytes());
         serializeByteBuf.resetReaderIndex();
         bh.consume(frame);
     }
 
     @Benchmark
-    public void lightProtoDeserializeReadString(Blackhole bh) throws Exception {
+    public void lightProtoDeserializeReadString(Blackhole bh) {
         frame.parseFrom(serializeByteBuf, serializeByteBuf.readableBytes());
         bh.consume(frame.getName());
         serializeByteBuf.resetReaderIndex();
