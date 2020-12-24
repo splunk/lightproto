@@ -49,4 +49,4 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: build and run tests
-        run: mvn -B -ntp -q license:check install -Dgpg.skip
+        run: mvn -B -ntp  -Dgpg.skip license:check install
