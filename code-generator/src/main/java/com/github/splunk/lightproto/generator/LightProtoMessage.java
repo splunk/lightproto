@@ -70,6 +70,18 @@ public class LightProtoMessage {
         generateClear(w);
         generateCopyFrom(w);
 
+        w.println("        public byte[] toByteArray() {");
+        w.println("            byte[] a = new byte[getSerializedSize()];");
+        w.println("            io.netty.buffer.ByteBuf b = io.netty.buffer.Unpooled.wrappedBuffer(a).writerIndex(0);");
+        w.println("            this.writeTo(b);");
+        w.println("            return a;");
+        w.println("        }");
+
+        w.println("        public void parseFrom(byte[] a) {");
+        w.println("            io.netty.buffer.ByteBuf b = io.netty.buffer.Unpooled.wrappedBuffer(a);");
+        w.println("            this.parseFrom(b, b.readableBytes());");
+        w.println("        }");
+
         w.println("        private int _cachedSize;\n");
         w.println("        private io.netty.buffer.ByteBuf _parsedBuffer;\n");
         w.println("    }");
