@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.github.splunk.lightproto</groupId>
         <artifactId>lightproto</artifactId>
-        <version>0.4</version>
+        <version>0.5-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
