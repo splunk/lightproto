@@ -180,4 +180,25 @@ public class MessagesTest {
         assertFalse(m.getX().hasA());
         assertFalse(m.getX().hasB());
     }
+
+    @Test
+    public void testByteArrays() throws Exception {
+        M lp1 = new M();
+        lp1.setX()
+                .setA("a")
+                .setB("b");
+
+        byte[] a1 = lp1.toByteArray();
+        assertEquals(lp1.getSerializedSize(), a1.length);
+
+        lp1.writeTo(bb1);
+        assertEquals(bb1, Unpooled.wrappedBuffer(a1));
+
+        M parsed = new M();
+        parsed.parseFrom(a1);
+        assertTrue(parsed.hasX());
+        assertTrue(parsed.getX().hasB());
+        assertEquals("a", parsed.getX().getA());
+        assertEquals("b", parsed.getX().getB());
+    }
 }
