@@ -51,6 +51,12 @@ public class LightProtoMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}", required = true, readonly = true)
     private MavenProject project;
 
+    @Parameter(defaultValue="generated-sources/protobuf/java", required = false)
+    private String targetSourcesSubDir;
+
+    @Parameter(defaultValue="generated-test-sources/protobuf/java", required = false)
+    private String targetTestSourcesSubDir;
+
     private void generate(List<File> protoFiles, File outputDirectory) throws MojoExecutionException {
         try {
             LightProtoGenerator.generate(protoFiles, outputDirectory, classPrefix, singleOuterClass);
@@ -69,8 +75,8 @@ public class LightProtoMojo extends AbstractMojo {
             File[] mainFilesArray = new File(baseDir, "src/main/proto").listFiles((dir, name) -> name.endsWith(".proto"));
             if (mainFilesArray != null && mainFilesArray.length > 0) {
                 List<File> mainFiles = Arrays.asList(mainFilesArray);
-                File generatedSourcesDir = new File(targetDir, "generated-sources/protobuf/java");
-                generate(mainFiles, new File(targetDir, "generated-sources/protobuf/java"));
+                File generatedSourcesDir = new File(targetDir, targetSourcesSubDir);
+                generate(mainFiles, new File(targetDir, targetSourcesSubDir));
 
                 project.addCompileSourceRoot(generatedSourcesDir.toString());
             }
@@ -78,13 +84,13 @@ public class LightProtoMojo extends AbstractMojo {
             File[] testFilesArray = new File(baseDir, "src/test/proto").listFiles((dir, name) -> name.endsWith(".proto"));
             if (testFilesArray != null && testFilesArray.length > 0) {
                 List<File> testFiles = Arrays.asList(testFilesArray);
-                File generatedTestSourcesDir = new File(targetDir, "generated-test-sources/protobuf/java");
+                File generatedTestSourcesDir = new File(targetDir, targetTestSourcesSubDir);
                 generate(testFiles, generatedTestSourcesDir);
 
                 project.addTestCompileSourceRoot(generatedTestSourcesDir.toString());
             }
         } else {
-            File generatedSourcesDir = new File(targetDir, "generated-sources/protobuf/java");
+            File generatedSourcesDir = new File(targetDir, targetSourcesSubDir);
             generate(sources, generatedSourcesDir);
             project.addCompileSourceRoot(generatedSourcesDir.toString());
         }
