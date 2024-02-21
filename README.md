@@ -1,4 +1,6 @@
-
+### IMPORTANT 
+Starting 21st of February 2024, splunk/lightproto project is archived. 
+That means Splunk organization is no longer maintaining and supporting lightproto features/project.
 
 ### Light Proto serialization
 
